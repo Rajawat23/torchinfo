@@ -255,9 +255,9 @@ def forward_pass(
         model.eval()
         with torch.no_grad():
             if isinstance(x, (list, tuple)):
-                _ = model.forward_dummy(device)(*x, **kwargs)
+                _ = model.to(device).forward_dummy(*x, **kwargs)
             elif isinstance(x, dict):
-                _ = model.forward_dummy(device)(**x, **kwargs)
+                _ = model.to(device).forward_dummy(**x, **kwargs)
             else:
                 # Should not reach this point, since process_input_data ensures
                 # x is either a list, tuple, or dict
